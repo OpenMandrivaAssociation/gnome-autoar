@@ -10,8 +10,8 @@
 %define develname	%mklibname -d %{name}
 
 Name:		gnome-autoar
-Version:	0.2.3
-Release:	3
+Version:	0.2.4
+Release:	1
 Summary:	Archive library
 
 Group:		System/Libraries
@@ -60,16 +60,13 @@ developing applications that use %{name}.
 
 %build
 %configure --disable-static
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 #we don't want these
 find %{buildroot} -name '*.la' -delete
-
-%check
-make check
 
 %files -n %{lib_name}
 %doc COPYING
