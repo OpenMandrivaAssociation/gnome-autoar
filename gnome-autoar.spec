@@ -11,7 +11,7 @@
 
 Name:		gnome-autoar
 Version:	0.2.4
-Release:	2
+Release:	3
 Summary:	Archive library
 
 Group:		System/Libraries
@@ -55,8 +55,7 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 %configure --disable-static
@@ -87,4 +86,3 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/libgnome-autoar-gtk-%{api}.so
 %{_datadir}/gir-1.0/GnomeAutoar-%{gi_major}.gir
 %{_datadir}/gir-1.0/GnomeAutoarGtk-%{gi_major}.gir
-
