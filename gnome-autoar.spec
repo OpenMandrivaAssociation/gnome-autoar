@@ -10,8 +10,8 @@
 %define develname	%mklibname -d %{name}
 
 Name:		gnome-autoar
-Version:	0.2.4
-Release:	3
+Version:	0.3.0
+Release:	1
 Summary:	Archive library
 
 Group:		System/Libraries
