@@ -62,7 +62,7 @@ developing applications that use %{name}.
 %build
 %meson  \
         -Dgtk=true \
-        -Dintrospection=true \
+        -Dintrospection=enabled \
         -Dvapi=true \
         -Dgtk_doc=true
 %meson_build
