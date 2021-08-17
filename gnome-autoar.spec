@@ -93,3 +93,4 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/libgnome-autoar-gtk-%{api}.so
 %{_datadir}/gir-1.0/GnomeAutoar-%{gi_major}.gir
 %{_datadir}/gir-1.0/GnomeAutoarGtk-%{gi_major}.gir
+%{_datadir}/vala/vapi/gnome-autoar-*
