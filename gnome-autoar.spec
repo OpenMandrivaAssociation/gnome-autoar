@@ -20,6 +20,7 @@ URL:		https://git.gnome.org/browse/gnome-autoar
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:  meson
+BuildRequires:  pkgconfig(gtk-doc)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
@@ -59,7 +60,11 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-%meson
+%meson  \
+        -Dgtk=true \
+        -Dintrospection=true \
+        -Dvapi=true \
+        -Dgtk_doc=true
 %meson_build
 
 %install
