@@ -10,7 +10,7 @@
 %define develname	%mklibname -d %{name}
 
 Name:		gnome-autoar
-Version:	0.3.3
+Version:	0.4.0
 Release:	1
 Summary:	Archive library
 
@@ -19,12 +19,15 @@ License:	LGPLv2+
 URL:		https://git.gnome.org/browse/gnome-autoar
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
+BuildRequires:  meson
+BuildRequires:  pkgconfig(gtk-doc)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libarchive)
+BuildRequires:  pkgconfig(vapigen)
 
 %description
 %{name} is a GObject based library for handling archives.
@@ -58,11 +61,15 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-%configure --disable-static
-%make_build
+%meson  \
+        -Dgtk=true \
+        -Dintrospection=enabled \
+        -Dvapi=true \
+        -Dgtk_doc=true
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 #we don't want these
 find %{buildroot} -name '*.la' -delete
@@ -86,3 +93,4 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/libgnome-autoar-gtk-%{api}.so
 %{_datadir}/gir-1.0/GnomeAutoar-%{gi_major}.gir
 %{_datadir}/gir-1.0/GnomeAutoarGtk-%{gi_major}.gir
+%{_datadir}/vala/vapi/gnome-autoar-*
