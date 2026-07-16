@@ -11,7 +11,7 @@
 
 Name:		gnome-autoar
 Version:	0.4.5
-Release:	6
+Release:	7
 Summary:	Archive library
 
 Group:		System/Libraries
