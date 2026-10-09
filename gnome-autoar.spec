@@ -61,6 +61,7 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
+# change linker, otherwise LLD scream about   ld.lld: error: /usr/lib64/clang/23/lib/x86_64-pc-linux-gnu/clang_rt.crtbegin.o is incompatible with elf32-i386
 export CFLAGS="%{optflags} -fuse-ld=mold"
 %meson  \
         -Dintrospection=enabled \
@@ -83,6 +84,7 @@ find %{buildroot} -name '*.la' -delete
 
 %files -n %{develname}
 %doc NEWS
+%doc %{_datadir}/doc/gnome-autoar/
 %{_includedir}/gnome-autoar-%{api}/
 %{_libdir}/pkgconfig/gnome-autoar-%{api}.pc
 %{_libdir}/libgnome-autoar-%{api}.so
