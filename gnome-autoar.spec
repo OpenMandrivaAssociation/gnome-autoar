@@ -20,6 +20,7 @@ URL:		https://git.gnome.org/browse/gnome-autoar
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:  meson
+BuildRequires:  mold
 BuildRequires:  gi-docgen
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
@@ -60,8 +61,7 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-export CC=gcc
-export CXX=g++
+export CFLAGS="%{optflags} -fuse-ld=mold"
 %meson  \
         -Dintrospection=enabled \
         -Dvapi=true \
