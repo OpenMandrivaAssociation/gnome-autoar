@@ -60,7 +60,9 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-export LDFLAGS="${LDFLAGS} -Wl,-m,elf_x86_64"
+%ifarch x86_64
+export GIR_EXTRA_LIBS_PATH="%{_libdir}"
+%endif
 %meson  \
         -Dintrospection=enabled \
         -Dvapi=true \
