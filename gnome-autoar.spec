@@ -10,8 +10,8 @@
 %define develname	%mklibname -d %{name}
 
 Name:		gnome-autoar
-Version:	0.4.5
-Release:	8
+Version:	0.5.2
+Release:	1
 Summary:	Archive library
 
 Group:		System/Libraries
@@ -20,12 +20,11 @@ URL:		https://git.gnome.org/browse/gnome-autoar
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:  meson
-BuildRequires:  pkgconfig(gtk-doc)
+BuildRequires:  gi-docgen
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:  pkgconfig(vapigen)
 
@@ -62,10 +61,9 @@ developing applications that use %{name}.
 
 %build
 %meson  \
-        -Dgtk=true \
         -Dintrospection=enabled \
         -Dvapi=true \
-        -Dgtk_doc=true
+        -Ddocs=true
 %meson_build
 
 %install
@@ -77,20 +75,15 @@ find %{buildroot} -name '*.la' -delete
 %files -n %{lib_name}
 %doc COPYING
 %{_libdir}/libgnome-autoar-%{api}.so.%{lib_major}*
-%{_libdir}/libgnome-autoar-gtk-%{api}.so.%{lib_major}*
 
 %files -n %{gi_name}
 %{_libdir}/girepository-1.0/GnomeAutoar-%{gi_major}.typelib
-%{_libdir}/girepository-1.0/GnomeAutoarGtk-%{gi_major}.typelib
 
 %files -n %{develname}
 %doc NEWS
 %doc %{_datadir}/gtk-doc/html/gnome-autoar/
 %{_includedir}/gnome-autoar-%{api}/
 %{_libdir}/pkgconfig/gnome-autoar-%{api}.pc
-%{_libdir}/pkgconfig/gnome-autoar-gtk-%{api}.pc
 %{_libdir}/libgnome-autoar-%{api}.so
-%{_libdir}/libgnome-autoar-gtk-%{api}.so
 %{_datadir}/gir-1.0/GnomeAutoar-%{gi_major}.gir
-%{_datadir}/gir-1.0/GnomeAutoarGtk-%{gi_major}.gir
 %{_datadir}/vala/vapi/gnome-autoar-*
