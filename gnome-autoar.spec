@@ -20,6 +20,7 @@ URL:		https://git.gnome.org/browse/gnome-autoar
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:  meson
+BuildRequires:  mold
 BuildRequires:  gi-docgen
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
@@ -60,6 +61,8 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
+# change linker, otherwise LLD scream about   ld.lld: error: /usr/lib64/clang/23/lib/x86_64-pc-linux-gnu/clang_rt.crtbegin.o is incompatible with elf32-i386
+export CFLAGS="%{optflags} -fuse-ld=mold"
 %meson  \
         -Dintrospection=enabled \
         -Dvapi=true \
@@ -81,7 +84,7 @@ find %{buildroot} -name '*.la' -delete
 
 %files -n %{develname}
 %doc NEWS
-%doc %{_datadir}/gtk-doc/html/gnome-autoar/
+%doc %{_datadir}/doc/gnome-autoar/
 %{_includedir}/gnome-autoar-%{api}/
 %{_libdir}/pkgconfig/gnome-autoar-%{api}.pc
 %{_libdir}/libgnome-autoar-%{api}.so
