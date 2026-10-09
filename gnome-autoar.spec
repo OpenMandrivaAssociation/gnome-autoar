@@ -60,6 +60,7 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
+export LDFLAGS="${LDFLAGS} -Wl,-m,elf_x86_64"
 %meson  \
         -Dintrospection=enabled \
         -Dvapi=true \
@@ -81,7 +82,6 @@ find %{buildroot} -name '*.la' -delete
 
 %files -n %{develname}
 %doc NEWS
-%doc %{_datadir}/gtk-doc/html/gnome-autoar/
 %{_includedir}/gnome-autoar-%{api}/
 %{_libdir}/pkgconfig/gnome-autoar-%{api}.pc
 %{_libdir}/libgnome-autoar-%{api}.so
