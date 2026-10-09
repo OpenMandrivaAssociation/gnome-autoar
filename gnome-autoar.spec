@@ -60,9 +60,8 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-%ifarch x86_64
-export GIR_EXTRA_LIBS_PATH="%{_libdir}"
-%endif
+export CC=gcc
+export CXX=g++
 %meson  \
         -Dintrospection=enabled \
         -Dvapi=true \
